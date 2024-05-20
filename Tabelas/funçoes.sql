@@ -83,3 +83,25 @@ BEGIN
 
     RETURN @valor_total;
 END;
+
+
+
+
+---funções para o stored procedure CriarEvento---
+CREATE FUNCTION EventPro.checkId_evento (@id_evento INT) RETURNS INT
+AS
+	BEGIN
+		DECLARE @counter INT
+		SELECT @counter=COUNT(1) FROM Evento WHERE id = @id_evento
+		RETURN @counter
+	END
+GO
+
+CREATE FUNCTION EventPro.BuscarId_evento (@nomeEvento VARCHAR(50)) RETURNS INT
+AS
+    BEGIN
+        DECLARE @id_evento INT
+        SELECT @id_evento=id FROM Evento WHERE nome = @nomeEvento
+        RETURN @id_evento
+    END 
+---inacabada---
