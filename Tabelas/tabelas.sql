@@ -18,6 +18,7 @@ CREATE TABLE EventPro.Trabalhador (
     num_CC CHAR(9),
     função VARCHAR(255),
     id INT PRIMARY KEY,
+    id_evento INT,
     FOREIGN KEY (num_CC) REFERENCES EventPro.Pessoa(num_CC)
 );
 
@@ -25,6 +26,7 @@ CREATE TABLE EventPro.Trabalhador (
 CREATE TABLE EventPro.Participante (
     num_CC CHAR(9),
     id INT PRIMARY KEY,
+    id_evento INT,
     FOREIGN KEY (num_CC) REFERENCES EventPro.Pessoa(num_CC)
 );
 
