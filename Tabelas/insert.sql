@@ -134,11 +134,11 @@ INSERT INTO EventPro.Trabalhador (num_CC, função, id, id_evento) VALUES
 ('778901244', 'Segurança', 2, 2);
 
 -- Insert data into Participante table
-INSERT INTO EventPro.Participante (num_CC, id, id_evento) VALUES
-('889012348', 1, 1),
-('990123459', 2, 1),
-('001234570', 3, 2),
-('112345671',4), 2;
+INSERT INTO EventPro.Participante (num_CC, id) VALUES
+('889012348', 1),
+('990123459', 2),
+('001234570', 3),
+('112345671', 4);
 
 
 
