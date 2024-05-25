@@ -35,7 +35,6 @@ CREATE TABLE EventPro.Evento (
     id INT PRIMARY KEY,
     nome VARCHAR(100),
     descrição VARCHAR(255),
-    custo_previsto DECIMAL(10,2),
     localização VARCHAR(255),
     lotação_máx INT,
     data_hora DATETIME,
@@ -81,8 +80,12 @@ CREATE TABLE EventPro.Colaborador (
     id_evento INT,
     FOREIGN KEY (id_evento) REFERENCES EventPro.Evento(id)
 );
+
 -- Índice para agrupamento por tipo em Colaborador
 CREATE INDEX idx_colaborador_tipo ON EventPro.Colaborador(tipo);
+
+
+
 
 -- Creating the Pagamento_Bilhete table
 CREATE TABLE EventPro.Pagamento_Bilhete (
@@ -111,5 +114,5 @@ CREATE TABLE EventPro.Tem (
     id_evento INT,
     id_colaboradores INT,
     FOREIGN KEY (id_evento) REFERENCES EventPro.Evento(id),
-    FOREIGN KEY (id_colaboradores) REFERENCES EventPro.Colaborador(id)
+    FOREIGN KEY (id_colaboradores) REFERENCES EventPro.Colaboradoro(id) 
 );

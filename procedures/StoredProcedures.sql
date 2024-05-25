@@ -6,7 +6,7 @@ CREATE PROCEDURE CriarEvento (
     @localEvento VARCHAR(50), 
     @descricaoEvento VARCHAR(100),
     @lotacao_max INT,
-    @custo_previsto DECIMAL(10,2)
+    @id_organizador INT
 )
 AS 
 BEGIN 
@@ -25,8 +25,8 @@ BEGIN
         END
 
         -- Inserir o evento na tabela Evento
-        INSERT INTO EventPro.Evento (id, nome, descrição, custo_previsto, localização, lotação_máx, data_hora)
-        VALUES (@novo_id, @nomeEvento, @descricaoEvento, @custo_previsto, @localEvento, @lotacao_max, @data_hora);
+        INSERT INTO EventPro.Evento (id, nome, descrição, localização, lotação_máx, data_hora, id_organizador)
+        VALUES (@novo_id, @nomeEvento, @descricaoEvento, @localEvento, @lotacao_max, @data_hora,  @id_organizador);
 
     END TRY
     BEGIN CATCH
@@ -37,6 +37,36 @@ END;
 
 -----inacabado----------------------------------------------
 
+
+--Stored procedure que vai vê o email do organizador que efetuou login e procura o seu id
+CREATE PROCEDURE OrganizadorID (
+    @email VARCHAR(100)
+)
+AS
+BEGIN
+    DECLARE @id_organizador INT;
+    DECLARE @erro VARCHAR(100);
+
+    BEGIN TRY
+        -- Verificar se o email existe
+        IF NOT EXISTS (SELECT 1 FROM EventPro.Organizador WHERE num_CC = (SELECT num_CC FROM EventPro.Pessoa WHERE email = @email))
+        BEGIN
+            RAISERROR('O email não existe', 16, 1);
+            RETURN;
+        END
+
+        -- Obter o id do organizador
+        SELECT @id_organizador = id FROM EventPro.Organizador WHERE num_CC = (SELECT num_CC FROM EventPro.Pessoa WHERE email = @email);
+
+        -- Retornar o id do organizador
+        SELECT @id_organizador;
+
+    END TRY
+    BEGIN CATCH
+        SET @erro = ERROR_MESSAGE();
+        RAISERROR(@erro, 16, 1);
+    END CATCH
+END;
 
 
 

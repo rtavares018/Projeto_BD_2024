@@ -28,8 +28,8 @@ criar trabalhador e colaborador
 estatisticas evento
 
 Regina:
-criar evento
-colaborador hp
+criar evento -- done
+colaborador hp 
 
 
 
